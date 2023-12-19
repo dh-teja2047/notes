@@ -1,0 +1,106 @@
+.main{
+    width: 435px;
+}
+
+.title{
+    width: 197px;
+    height: 37px;
+    margin: 30px 0px 0px 24px;
+}
+
+.button{
+    width: 243px;
+    height: 51px;
+    margin: 27px 0px 0px 44px;
+    border-radius: 50px;
+    background: #000000;
+
+    color: #FFFFFF;
+}
+
+.groupName{
+    display:inline;
+    width: 162px;
+    height: 44px;
+    margin: 30px 0px 0px 35px;
+    /* top: 442.67px;
+    left: 437px; */
+
+}
+
+.textBox{
+    border: 2px solid #CCCCCC;
+    border-radius: 8px;
+}
+
+.textArea{
+    width: 435px;
+    height: 70px;
+    /* margin: 30px 0px 0px 35px; */
+    color: #979797;
+    border:none;
+
+    font-family: Roboto;
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 37px;
+    letter-spacing: 0.035em;
+    text-align: left;
+
+}
+
+.chooseColor{
+    margin: 30px 0px 0px 35px;
+}
+
+.violet, .pink, .cyan, .orange, .blue, .lightblue{
+    margin: 30px 0px 0px 35px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    /* top: 532px;
+    left: 669px; */
+}
+
+.violet{
+    background-color:#B38BFA
+}
+
+.pink{
+    background-color: #FF79F2
+}
+
+.cyan{  
+    background-color:#43E6FC
+}   
+
+.orange{
+    background-color:#F19576
+}
+
+.blue{
+    background-color:#0047FF
+}
+
+.lightblue{
+    background-color:#6691FF
+}
+
+
+.closeBtn {
+    width: 154px;
+    height: 38px;
+    border-radius: 11px;
+    margin: 70px 0px 0px 580px;
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0.035em;
+    
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
