@@ -61,30 +61,56 @@
     border: none;
     /* top: 532px;
     left: 669px; */
+
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+     transition-duration: 0.4s;
 }
 
 .violet{
-    background-color:#B38BFA
+    background-color:#B38BFA;
 }
+
+.violet:hover  {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
+  }
 
 .pink{
     background-color: #FF79F2
+}
+
+.pink:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
 }
 
 .cyan{  
     background-color:#43E6FC
 }   
 
+.cyan:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
+}
+
 .orange{
     background-color:#F19576
 }
 
+.orange:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
+}
 .blue{
     background-color:#0047FF
 }
 
+.blue:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
+}
+
 .lightblue{
     background-color:#6691FF
+}
+.lightblue:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
 }
 
 
@@ -104,3 +130,30 @@
     border: none;
     cursor: pointer;
   }
+/* .notesList{
+    align-items: center;
+    margin: 2px 0px 0px 0px;
+} */
+
+.indNotes:hover{
+    background-color: #f4f4f4;
+}
+
+.titleDisc{
+    font-family: Roboto;
+font-size: 24px;
+font-weight: 500;
+line-height: 24px;
+letter-spacing: 0.02em;
+text-align: left;
+
+  }
+.notesTitle{
+    font-family: Roboto;
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.02em;
+    text-align: left;
+
+}
