@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './CreateNotesPopup.module.css';
 
 const CreateNotesPopup = ({ isOpen, onClose, children }) => {
+   
   return (
     isOpen && (
       <div className={styles.popupOverlay}>

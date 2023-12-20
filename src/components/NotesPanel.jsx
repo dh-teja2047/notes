@@ -4,7 +4,7 @@ import CreateNotesPopup from './CreateNotesPopup';
 
 const NotesPanel = () => {
     const [createNotesGroup, setCreateNotesGroup] = useState(false);
-    const [notesList, setNotesList] = useState();
+    const [notesList, setNotesList] = useState([]);
     const [notesName, setNotesName] = useState('');
     const [notesColor, setNotesColor] =useState('');
 
@@ -21,15 +21,13 @@ const NotesPanel = () => {
     //     setNotesList(storedNotesList);
     //   }, []);
 
-
       useEffect(() => {
-        const storedNotesList = localStorage.getItem('notesList');
+        const storedNotesList = JSON.parse(localStorage.getItem('notesList'));
+        console.log(storedNotesList)
         if (storedNotesList) {
-          const storedNotes = JSON.parse(storedNotesList);
-          setNotesList(storedNotes);
+          setNotesList(storedNotesList);
         }
       }, []);
-      
 
     useEffect( () =>{
         localStorage.setItem('notesList', JSON.stringify(notesList))
