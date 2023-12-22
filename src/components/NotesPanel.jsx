@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './NotesPanel.module.css';
 import CreateNotesPopup from './CreateNotesPopup';
 
-const NotesPanel = () => {
+const NotesPanel = ({onClick}) => {
     const [createNotesGroup, setCreateNotesGroup] = useState(false);
     const [notesList, setNotesList] = useState([]);
     const [notesName, setNotesName] = useState('');
@@ -20,9 +20,9 @@ const NotesPanel = () => {
         setNotesColor(color);
       };
 
-    useEffect(() => {
-        localStorage.setItem('notesColor', notesColor);
-      }, [notesColor]);
+    // useEffect(() => {
+    //     localStorage.setItem('notesColor', notesColor);
+    //   }, [notesColor]);
 
     useEffect(() => {
         const storedNotesList = JSON.parse(localStorage.getItem('notesList'));
@@ -40,7 +40,7 @@ const NotesPanel = () => {
         event.preventDefault();
         if (notesName.trim() !== "" && notesColor !== "") {
             // Add new todo to the list
-            setNotesList([...notesList, { id: Date.now(), NotesTitle: notesName, NotesColor:notesColor, completed: false }]);
+            setNotesList([...notesList, { id: Date.now(), NotesTitle: notesName, NotesColor:notesColor}]);
             // Clear the input field
             setNotesName("")
         }
@@ -79,7 +79,7 @@ const NotesPanel = () => {
             </CreateNotesPopup>
         <ul className={styles.notesList}>
             {notesList.map((notes,id) =>(
-                <div className={styles.indNotes} style={{height:'70px', display:'flex'}} >
+                <div className={styles.indNotes} style={{height:'70px', display:'flex'}} onClick={onClick}>
                     <div  style={{ backgroundColor: notes.NotesColor, width:'50px', height:'50px',borderRadius: '50%', textAlign:'center',}}>
                         <p className={styles.tilteDisc}>{notes.NotesTitle.substring(0, 2).toUpperCase()}</p>
                     </div>
@@ -88,6 +88,7 @@ const NotesPanel = () => {
                     </div>
                     
                 </div>
+                
             ))}
         </ul>
 

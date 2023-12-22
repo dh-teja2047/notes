@@ -1,0 +1,31 @@
+.backgroundBox{
+    display: flex;
+    width: 1077px;
+    height: 854px;
+    margin: 98px 0px 0px;
+    border-radius: 0px, 0px, 0px, 15px;
+    background-color: #F7ECDC;
+}
+
+.textBox{
+    width: 1078px;
+    /* height: 255px; */
+    margin: 697px 0px 0px;
+    background-color: #E8E8E8;
+
+    display: flex;
+
+}
+
+.inputBox{
+    display: flex;
+    width: 1014px;
+    margin: 20px;
+    /* height: 211px; */
+    /* padding: 720px 0px 0px; */
+    /* top: 720px;
+    left: 468px; */
+    border-radius: 9px;
+    border: 1px;
+    background-color: #FFFFFF;
+}

@@ -99,7 +99,7 @@
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
 }
 .blue{
-    background-color:#0047FF
+    background-color:#0047FF;
 }
 
 .blue:hover{
@@ -107,7 +107,7 @@
 }
 
 .lightblue{
-    background-color:#6691FF
+    background-color:#6691FF;
 }
 .lightblue:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
