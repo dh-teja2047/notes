@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styles from './NotesPanel.module.css';
 import CreateNotesPopup from './CreateNotesPopup';
+import { NoteStore } from '../store/NotesDetails';
 
-const NotesPanel = ({onClick}) => {
+const NotesPanel = ({ onClick }) => {
     const [createNotesGroup, setCreateNotesGroup] = useState(false);
     const [notesList, setNotesList] = useState([]);
     const [notesName, setNotesName] = useState('');
-    const [notesColor, setNotesColor] =  useState('');
+    const [notesColor, setNotesColor] = useState('');
+    const [notesContent, setNotesContent] = useState('');
+
+    const activeNote = NoteStore.useState((s) => s.notes);
 
     const createNotes = () => {
         setCreateNotesGroup(true);
@@ -18,11 +22,12 @@ const NotesPanel = ({onClick}) => {
 
     const handleColorSelect = (color) => {
         setNotesColor(color);
-      };
+    };
 
     // useEffect(() => {
     //     localStorage.setItem('notesColor', notesColor);
     //   }, [notesColor]);
+
 
     useEffect(() => {
         const storedNotesList = JSON.parse(localStorage.getItem('notesList'));
@@ -36,16 +41,26 @@ const NotesPanel = ({onClick}) => {
         localStorage.setItem('notesList', JSON.stringify(notesList))
     }, [notesList]);
 
+    const updateNoteStore = (notes) => {
+        NoteStore.update((s) => {
+          s.notes = notes;
+        });
+      }
+    
+//&& notesContent !== ""
     const handleNotesSubmit = (event) => {
         event.preventDefault();
-        if (notesName.trim() !== "" && notesColor !== "") {
-            // Add new todo to the list
-            setNotesList([...notesList, { id: Date.now(), NotesTitle: notesName, NotesColor:notesColor}]);
+        if (notesName.trim() !== "" && notesColor !== "" && notesContent ==="") {
+            
+            const newNote = { id: Date.now(), NotesTitle: notesName, NotesColor: notesColor, NotesContent: notesContent};
+
+            updateNoteStore(newNote);
+            setNotesList([...notesList, newNote]);
+
             // Clear the input field
             setNotesName("")
         }
     };
-
 
     return (
         <div className={styles.main}>
@@ -61,36 +76,48 @@ const NotesPanel = ({onClick}) => {
                         <input type="text" className={styles.textArea} placeholder='Enter your group here'
                             value={notesName}
                             onChange={(e) => setNotesName(e.target.value)} />
-                        <button className={styles.closeBtn}>
+                        {/* <button className={styles.closeBtn}>
                             Create
-                        </button>
+                        </button> */}
                     </div>
                     <div style={{ display: 'flex' }}>
                         <h2 className={styles.chooseColor}>Choose colour</h2>
-                        <button className={styles.violet} id="violet" onClick={() =>handleColorSelect('Violet') }></button>
-                        <button className={styles.pink} id='pink' onClick={() =>handleColorSelect('Pink')}></button>
-                        <button className={styles.cyan} id='cyan' onClick={() =>handleColorSelect('Cyan')}></button>
-                        <button className={styles.orange} id='orange' onClick={() =>handleColorSelect('Orange')}></button>
-                        <button className={styles.blue} id='blue' onClick={() =>handleColorSelect('Blue')}></button>
-                        <button className={styles.lightblue} id='lightblue' onClick={() =>handleColorSelect('Light Blue')}></button>
+                        <button className={styles.violet} id="violet" onClick={() => handleColorSelect('Violet')}></button>
+                        <button className={styles.pink} id='pink' onClick={() => handleColorSelect('Pink')}></button>
+                        <button className={styles.cyan} id='cyan' onClick={() => handleColorSelect('Cyan')}></button>
+                        <button className={styles.orange} id='orange' onClick={() => handleColorSelect('Orange')}></button>
+                        <button className={styles.blue} id='blue' onClick={() => handleColorSelect('Blue')}></button>
+                        <button className={styles.lightblue} id='lightblue' onClick={() => handleColorSelect('Light Blue')}></button>
                     </div>
                 </form>
 
             </CreateNotesPopup>
-        <ul className={styles.notesList}>
-            {notesList.map((notes,id) =>(
-                <div className={styles.indNotes} style={{height:'70px', display:'flex'}} onClick={onClick}>
-                    <div  style={{ backgroundColor: notes.NotesColor, width:'50px', height:'50px',borderRadius: '50%', textAlign:'center',}}>
-                        <p className={styles.tilteDisc}>{notes.NotesTitle.substring(0, 2).toUpperCase()}</p>
+            <ul className={styles.notesList}>
+                {notesList.map((notes, id) => (
+                    <div className={styles.indNotes} style={{ height: '70px', display: 'flex' }} onClick={onClick}>
+                        <button 
+                            style={{
+                                display: 'flex' , 
+                                width:'323px', 
+                                border:'none', 
+                                background:'none'
+                            }}  
+                            onClick={() => updateNoteStore(notes)}
+                            >
+
+                            <div style={{ backgroundColor: notes.NotesColor, width: '50px', height: '50px', borderRadius: '50%', textAlign: 'center', }}>
+                                <p className={styles.tilteDisc}>{notes.NotesTitle.substring(0, 2).toUpperCase()}</p>
+                            </div>
+                            <div className={styles.notesTitle} style={{ padding: '10px 0px 0px 10px' }}>
+                                {notes.NotesTitle}
+                            </div>
+
+                        </button>
+
                     </div>
-                    <div className={styles.notesTitle}style={{padding:'10px 0px 0px 10px'}}>
-                    {notes.NotesTitle}
-                    </div>
-                    
-                </div>
-                
-            ))}
-        </ul>
+
+                ))}
+            </ul>
 
         </div>
     )

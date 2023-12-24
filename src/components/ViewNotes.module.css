@@ -1,8 +1,16 @@
-.backgroundBox{
-    display: flex;
+.notesTitleDisc{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+    text-align: center;
+
+}
+.contentBox{
+    display: block;
     width: 1077px;
-    height: 854px;
-    margin: 98px 0px 0px;
+    height: 654px;
+    /* margin: 98px 0px 0px; */
     border-radius: 0px, 0px, 0px, 15px;
     background-color: #F7ECDC;
 }
@@ -20,8 +28,8 @@
 .inputBox{
     display: flex;
     width: 1014px;
-    margin: 20px;
-    /* height: 211px; */
+    margin:20px 20px 20px 20px;
+    height: 111px;
     /* padding: 720px 0px 0px; */
     /* top: 720px;
     left: 468px; */

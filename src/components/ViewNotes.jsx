@@ -1,68 +1,78 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
+import { NoteStore } from "../store/NotesDetails";
 import styles from './ViewNotes.module.css';
 function ViewNotes() {
 
-    // useEffect(() => {
+  const activeNote = NoteStore.useState((s) => s.notes);
+  const [content, setContent] = useState("");
 
-    //     const keys = Object.keys(localStorage);
+  function onSubmit() {
+    console.log(activeNote);
+    NoteStore.update((s) => {
+      const clonedNote = {
+        ...s.notes,
+      };
+      clonedNote.content.push({
+        timestamp: Date.now(),
+        value: content, // contentRef.current,
+      });
+      s.notes = clonedNote;
+    });
+    setContent('');
+  }
 
-
-    //     // Iterate through keys and retrieve values
-    //     keys.forEach((key) => {
-    //         const value = localStorage.getItem(key);
-    //         console.log(`Key: ${key}, Value: ${value}`);
-    //     });
-    // }, []);
-
-    const [inputText, setInputText] = useState("");
-  const [submittedText, setSubmittedText] = useState("");
-
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
-  };
-
-  const handleSubmission = () => {
-    // Handle the submission logic here (e.g., send inputText to an API, etc.)
-    setSubmittedText(inputText);
-    console.log("Submitted:", inputText);
-  };
 
   const handleKeyPress = (e) => {
     // If the Enter key is pressed, submit the input
     if (e.key === "Enter") {
-      handleSubmission();
+      onSubmit();
     }
   };
 
-    return (
-        <div className={styles.backgroundBox}>
-            {submittedText}
-            <div className={styles.textBox}>
-                <div className={styles.inputBox}>
-                        <input type="text" placeholder="Enter your text here..........."
-
-                            value={inputText}
-                            onChange={handleInputChange}
-                            onKeyPress={handleKeyPress}
-
-                        />
-                        <span
-                            role="button"
-                            onClick={handleSubmission}
-                            style={{ cursor: 'pointer', marginLeft: '5px' }}
-                        >
-                            🚀
-                        </span>
-                    
-                </div>
-                
-
-            </div>
-
-
+  return (
+    <div style={{ backgroundColor: '#E8E8E8', }}>
+      <div style={{ display: 'flex' }}>
+        <div className={styles.notesTitleDisc} style={{ backgroundColor: activeNote.NotesColor }}>
+          <p className={styles.tilteDisc}>{activeNote.NotesTitle.substring(0, 2).toUpperCase()}</p>
         </div>
+        <p style={{ padding: '0px 0px 0px 10px' }}>{activeNote.NotesTitle}</p>
+      </div>
+      <div className={styles.contentBox} >
+        content:{' '}
+        {Array.isArray(activeNote.content)
+          ? activeNote.content.map((notes) => {
+            return (
+              <div>
+                <p>{new Date(notes.timestamp).toLocaleDateString()}</p>
+                <p>{new Date(notes.timestamp).toLocaleTimeString()}</p>
+                <p>{notes.value}</p>
+              </div>
+            );
+          })
+          : null}
+      </div>
 
-    )
+      <div className={styles.inputBox}>
+        <input
+          onChange={(e) => {
+            // contentRef.current = e.target.value;
+            setContent(e.target.value);
+          }}
+          value={content}
+          placeholder="Enter your text here..........."
+          onKeyPress={handleKeyPress}
+        />
+        <span
+          role="button"
+          onClick={onSubmit}
+          style={{ cursor: 'pointer', marginLeft: '5px' }}
+        >
+          🚀
+        </span>
+      </div>
+    </div>
+
+  )
 }
 
 export default ViewNotes
