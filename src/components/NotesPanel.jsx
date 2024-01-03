@@ -9,7 +9,7 @@ const NotesPanel = ({ onClick }) => {
     const [notesName, setNotesName] = useState('');
     const [notesColor, setNotesColor] = useState('');
     const [notesContent, setNotesContent] = useState('');
-
+ 
     const activeNote = NoteStore.useState((s) => s.notes);
 
     const createNotes = () => {
