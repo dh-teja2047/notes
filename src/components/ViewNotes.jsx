@@ -18,6 +18,8 @@ function ViewNotes() {
     }
   }, []);
 
+  const activeContent = data.find(note => note.id === activeNote.id)
+
   const  onSubmit =() => {
 
     const newData = [...data];
@@ -38,9 +40,11 @@ function ViewNotes() {
     const currentId = item.id;
     console.log(activeId)
     console.log(currentId)
+    
     if (activeId == currentId){
+        const newContent = [...item.NotesContent,content]
         {
-            item.NotesContent= content;  
+            item.NotesContent= newContent;  
         }
 
         localStorage.setItem('notesListStored', JSON.stringify(newData)); 
@@ -119,18 +123,19 @@ function ViewNotes() {
         {/* {this.notesListStored.NotesContent} */}
         {/* console.log(activeNote.NotesContent) */}
         {/* {.NotesContent} */}
-        {/* content:{' '}
-        {Array.isArray(activeNote.content)
-          ? activeNote.content.map((notes) => {
+        {/* {JSON.stringify(activeContent)} */}
+        {
+        activeContent && Array.isArray(activeContent.NotesContent)
+          ? activeContent.NotesContent.map((notes) => {
             return (
               <div>
-                <p>{new Date(notes.timestamp).toLocaleDateString()}</p>
-                <p>{new Date(notes.timestamp).toLocaleTimeString()}</p>
-                <p>{notes.value}</p>
+                {/* <p>{new Date(notes.timestamp).toLocaleDateString()}</p> */}
+                {/* <p>{new Date(notes.timestamp).toLocaleTimeString()}</p> */}
+                <p>{notes}</p>
               </div>
             );
           })
-          : null} */}
+          : null} 
       </div>
 
       <div className={styles.inputBox}>
